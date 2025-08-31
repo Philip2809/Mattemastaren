@@ -1,5 +1,7 @@
 # Mattemästaren
 
+detta är json server fix!
+
 - Installera nodejs + npm
   - [nodejs.org](https://nodejs.org/en)
 - Installera `pnpm` med `npm install -g pnpm`
