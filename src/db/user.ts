@@ -12,6 +12,9 @@ async function addUser(user: User) {
 }
 
 async function getUser(username: string) {
-    const res = await httpClient.get(`/users`, { params: { username } });
-    return res.data;
+    const res = await httpClient.get<User[]>(`/users`, { params: { username } });
+    const users: User[] = res.data;
+    if (users.length === 0) return undefined;
+    if (users.length > 1) throw new Error("Multiple users with same username");
+    return res.data[0] as User;
 }

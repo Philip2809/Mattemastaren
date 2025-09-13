@@ -1,9 +1,18 @@
 import { createId } from '@paralleldrive/cuid2';
 import { userDb } from '../db/user';
 import bcrypt from "bcryptjs";
+import * as jose from 'jose'
+/* 
+    * Doing auth this way really hurts my soul, auth should never be done this way, it should be using the latest standards and a server of couse
+    * however doing this for a demo project this is perfectly fine as it will never be used in production and is only for learning purposes. However
+    * I wanted to make this aknowledgement, and to make sure no one uses this code in production.
+*/
 
 export const userService = {
     register,
+    login,
+    verifyUser,
+    verifyToken
 }
 
 export interface RegisterUser {
@@ -14,6 +23,39 @@ export interface RegisterUser {
 
 export interface User extends RegisterUser {
     id: string;
+}
+
+const SECRET = new TextEncoder().encode('newton-sysm8-demo-project');
+
+async function verifyToken(token:string) {
+    try {
+        await jose.jwtVerify(token, SECRET);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+async function verifyUser(token: string, userId: string) {
+    const { payload } = await jose.jwtVerify(token, SECRET);
+    if (payload.id !== userId) return false;
+    return true;
+}
+
+async function login(username: string, password: string) {
+    const user = await userDb.getUser(username);
+    if (!user) return false;
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) return false;
+
+    // JWT SHOULD NOT BE DONE THIS WAY!!!
+    // JWT should be signed by a key, not a string. JWT should have a access token and a refresh token; access token in memory and refresh token in a http only cookie
+    // Once again, this is just for demo purposes and should never be used in production
+    const token = await new jose.SignJWT({ id: user.id, username: user.username })
+        .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+        .sign(SECRET);
+    return token;
 }
 
 async function register(registerUser: RegisterUser) {
