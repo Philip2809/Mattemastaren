@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
     "axios": "^1.12.1",
+    "bcryptjs": "^3.0.2",
     "json-server": "1.0.0-beta.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router": "^7.9.1",
     "sass": "^1.91.0"
   },
   "devDependencies": {
