@@ -1,0 +1,281 @@
+{
+  "exercises": [
+    {
+      "id": "ex_001",
+      "title": "Enkel addition",
+      "description": "Räkna ut summan av två tal",
+      "category": "addition",
+      "difficulty": "easy",
+      "type": "calculation",
+      "question": "Vad är {{num1}} + {{num2}}?",
+      "variables": {
+        "num1": { "min": 1, "max": 10 },
+        "num2": { "min": 1, "max": 10 }
+      },
+      "answerFormula": "{{num1}} + {{num2}}",
+      "timeLimit": 30,
+      "points": 10,
+      "hints": [
+        "Räkna på fingrarna om du behöver",
+        "Tänk på att addition betyder att lägga ihop"
+      ]
+    },
+    {
+      "id": "ex_002", 
+      "title": "Enkel subtraktion",
+      "description": "Räkna ut skillnaden mellan två tal",
+      "category": "subtraction",
+      "difficulty": "easy",
+      "type": "calculation",
+      "question": "Vad är {{num1}} - {{num2}}?",
+      "variables": {
+        "num1": { "min": 5, "max": 20 },
+        "num2": { "min": 1, "max": 10 }
+      },
+      "answerFormula": "{{num1}} - {{num2}}",
+      "timeLimit": 30,
+      "points": 10,
+      "hints": [
+        "Subtraktion betyder att ta bort",
+        "Räkna bakåt från det första talet"
+      ]
+    },
+    {
+      "id": "ex_003",
+      "title": "Liten gångertabell",
+      "description": "Öva på gångertabellen 1-5",
+      "category": "multiplication",
+      "difficulty": "easy",
+      "type": "calculation", 
+      "question": "Vad är {{num1}} × {{num2}}?",
+      "variables": {
+        "num1": { "min": 1, "max": 5 },
+        "num2": { "min": 1, "max": 5 }
+      },
+      "answerFormula": "{{num1}} * {{num2}}",
+      "timeLimit": 45,
+      "points": 15,
+      "hints": [
+        "Multiplikation är samma som att lägga ihop samma tal flera gånger",
+        "3 × 4 är samma som 3 + 3 + 3 + 3"
+      ]
+    },
+    {
+      "id": "ex_004",
+      "title": "Enkel division",
+      "description": "Dela tal som går jämnt upp",
+      "category": "division",
+      "difficulty": "easy",
+      "type": "calculation",
+      "question": "Vad är {{dividend}} ÷ {{divisor}}?",
+      "variables": {
+        "dividend": { "values": [4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20] },
+        "divisor": { "values": [2, 3, 4, 5] }
+      },
+      "answerFormula": "{{dividend}} / {{divisor}}",
+      "constraint": "{{dividend}} % {{divisor}} === 0",
+      "timeLimit": 45,
+      "points": 15,
+      "hints": [
+        "Division är motsatsen till multiplikation",
+        "Tänk: vilket tal gånger divisorn blir lika med dividenden?"
+      ]
+    },
+    {
+      "id": "ex_005",
+      "title": "Medelsvår addition",
+      "description": "Addition med större tal",
+      "category": "addition",
+      "difficulty": "medium",
+      "type": "calculation",
+      "question": "Vad är {{num1}} + {{num2}}?",
+      "variables": {
+        "num1": { "min": 15, "max": 50 },
+        "num2": { "min": 15, "max": 50 }
+      },
+      "answerFormula": "{{num1}} + {{num2}}",
+      "timeLimit": 60,
+      "points": 20,
+      "hints": [
+        "Dela upp talen i tior och ental för att göra det lättare",
+        "Till exempel: 23 + 17 = (20 + 10) + (3 + 7) = 30 + 10 = 40"
+      ]
+    },
+    {
+      "id": "ex_006",
+      "title": "Medelsvår subtraktion",
+      "description": "Subtraktion med större tal",
+      "category": "subtraction", 
+      "difficulty": "medium",
+      "type": "calculation",
+      "question": "Vad är {{num1}} - {{num2}}?",
+      "variables": {
+        "num1": { "min": 25, "max": 100 },
+        "num2": { "min": 10, "max": 40 }
+      },
+      "answerFormula": "{{num1}} - {{num2}}",
+      "timeLimit": 60,
+      "points": 20,
+      "hints": [
+        "Tänk på att dela upp talen i tior och ental",
+        "Om du behöver 'låna' från tiotal, kom ihåg att 1 tiotal = 10 ental"
+      ]
+    },
+    {
+      "id": "ex_007",
+      "title": "Större gångertabell",
+      "description": "Gångertabellen upp till 10",
+      "category": "multiplication",
+      "difficulty": "medium",
+      "type": "calculation",
+      "question": "Vad är {{num1}} × {{num2}}?",
+      "variables": {
+        "num1": { "min": 6, "max": 10 },
+        "num2": { "min": 1, "max": 10 }
+      },
+      "answerFormula": "{{num1}} * {{num2}}",
+      "timeLimit": 45,
+      "points": 25,
+      "hints": [
+        "Lär dig gångertabellerna utantill för snabbare räkning",
+        "9 × 7 = 9 × (10 - 3) = 90 - 27 = 63"
+      ]
+    },
+    {
+      "id": "ex_008",
+      "title": "Blandad räkning",
+      "description": "Addition och subtraktion i samma uppgift",
+      "category": "mixed",
+      "difficulty": "medium",
+      "type": "calculation",
+      "question": "Vad är {{num1}} + {{num2}} - {{num3}}?",
+      "variables": {
+        "num1": { "min": 10, "max": 30 },
+        "num2": { "min": 5, "max": 20 },
+        "num3": { "min": 3, "max": 15 }
+      },
+      "answerFormula": "{{num1}} + {{num2}} - {{num3}}",
+      "timeLimit": 75,
+      "points": 30,
+      "hints": [
+        "Räkna från vänster till höger",
+        "Först {{num1}} + {{num2}}, sedan subtrahera {{num3}}"
+      ]
+    },
+    {
+      "id": "ex_009",
+      "title": "Jämförelse av tal",
+      "description": "Vilket tal är störst?",
+      "category": "comparison",
+      "difficulty": "easy",
+      "type": "multiple_choice",
+      "question": "Vilket tal är störst: {{num1}}, {{num2}} eller {{num3}}?",
+      "variables": {
+        "num1": { "min": 1, "max": 50 },
+        "num2": { "min": 1, "max": 50 },
+        "num3": { "min": 1, "max": 50 }
+      },
+      "answerFormula": "Math.max({{num1}}, {{num2}}, {{num3}})",
+      "options": ["{{num1}}", "{{num2}}", "{{num3}}"],
+      "timeLimit": 30,
+      "points": 15,
+      "hints": [
+        "Jämför talen ett i taget",
+        "Titta först på hur många siffror talet har, sedan på första siffran"
+      ]
+    },
+    {
+      "id": "ex_010",
+      "title": "Ordna tal i storleksordning",
+      "description": "Sortera tal från minst till störst",
+      "category": "ordering",
+      "difficulty": "medium", 
+      "type": "sorting",
+      "question": "Ordna dessa tal från minst till störst: {{num1}}, {{num2}}, {{num3}}, {{num4}}",
+      "variables": {
+        "num1": { "min": 1, "max": 100 },
+        "num2": { "min": 1, "max": 100 },
+        "num3": { "min": 1, "max": 100 },
+        "num4": { "min": 1, "max": 100 }
+      },
+      "answerFormula": "[{{num1}}, {{num2}}, {{num3}}, {{num4}}].sort((a, b) => a - b)",
+      "timeLimit": 90,
+      "points": 35,
+      "hints": [
+        "Börja med att hitta det minsta talet",
+        "Sedan hittar du det näst minsta och så vidare",
+        "Jämför talen två och två om det hjälper"
+      ]
+    }
+  ],
+  "categories": {
+    "addition": {
+      "name": "Addition",
+      "description": "Övningar med addition (plus)",
+      "icon": "➕",
+      "color": "#4CAF50"
+    },
+    "subtraction": {
+      "name": "Subtraktion", 
+      "description": "Övningar med subtraktion (minus)",
+      "icon": "➖",
+      "color": "#FF9800"
+    },
+    "multiplication": {
+      "name": "Multiplikation",
+      "description": "Övningar med multiplikation (gånger)",
+      "icon": "✖️",
+      "color": "#2196F3"
+    },
+    "division": {
+      "name": "Division",
+      "description": "Övningar med division (delat med)",
+      "icon": "➗",
+      "color": "#9C27B0"
+    },
+    "mixed": {
+      "name": "Blandad räkning",
+      "description": "Kombinationer av olika räknesätt",
+      "icon": "🔢",
+      "color": "#607D8B"
+    },
+    "comparison": {
+      "name": "Jämförelse",
+      "description": "Jämföra och bedöma tal",
+      "icon": "⚖️",
+      "color": "#795548"
+    },
+    "ordering": {
+      "name": "Ordning",
+      "description": "Sortera och ordna tal",
+      "icon": "📊",
+      "color": "#E91E63"
+    }
+  },
+  "difficulties": {
+    "easy": {
+      "name": "Lätt",
+      "description": "Grundläggande uppgifter för nybörjare",
+      "pointsMultiplier": 1.0,
+      "color": "#4CAF50"
+    },
+    "medium": {
+      "name": "Medel", 
+      "description": "Lite mer utmanande uppgifter",
+      "pointsMultiplier": 1.5,
+      "color": "#FF9800"
+    },
+    "hard": {
+      "name": "Svår",
+      "description": "Avancerade uppgifter för duktiga elever",
+      "pointsMultiplier": 2.0,
+      "color": "#F44336"
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2025-01-27",
+    "totalExercises": 10,
+    "lastUpdated": "2025-01-27"
+  }
+}
