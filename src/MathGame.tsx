@@ -1,7 +1,7 @@
 // Matematikspel
 import { useState } from 'react';
 import { createRandomExercise, checkAnswer } from './exercises';
-import './App.css';
+import './Home.css';
 
 function MathGame() {
   const [currentExercise, setCurrentExercise] = useState<any>(null);
