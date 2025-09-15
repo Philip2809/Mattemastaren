@@ -34,10 +34,16 @@ function Navbar({ currentPage, onNavigate }: NavbarProps) {
           </button>
           
           <div className="navbar-auth">
-            <button className="auth-button login-btn">
+            <button 
+              className="auth-button login-btn"
+              onClick={() => onNavigate('login')}
+            >
               Logga in
             </button>
-            <button className="auth-button register-btn">
+            <button 
+              className="auth-button register-btn"
+              onClick={() => onNavigate('register')}
+            >
               Registrera
             </button>
           </div>

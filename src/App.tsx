@@ -4,6 +4,8 @@ import './App.css'
 import MathGame from './MathGame'
 import Navbar from './components/Navbar'
 import HomePage from './components/HomePage'
+import LoginPage from './components/LoginPage'
+import RegisterPage from './components/RegisterPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -22,6 +24,14 @@ function App() {
       
       {currentPage === 'exercises' && (
         <MathGame />
+      )}
+      
+      {currentPage === 'login' && (
+        <LoginPage onNavigate={handleNavigate} />
+      )}
+      
+      {currentPage === 'register' && (
+        <RegisterPage onNavigate={handleNavigate} />
       )}
     </>
   )
