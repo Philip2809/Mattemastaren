@@ -1,10 +1,11 @@
+
 import './App.css'
+import MathGame from './MathGame'
 
 function App() {
-
   return (
     <>
-      <h1 className='text'>Mattemästaren</h1>
+      <MathGame />
     </>
   )
 }
