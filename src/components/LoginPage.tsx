@@ -1,12 +1,10 @@
 // Login sida - backend kommer att läggas till senare
 import { useState } from 'react';
 import './AuthPages.css';
+import { useNavigate } from 'react-router';
 
-interface LoginPageProps {
-  onNavigate: (page: string) => void;
-}
-
-function LoginPage({ onNavigate }: LoginPageProps) {
+function LoginPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -65,7 +63,7 @@ function LoginPage({ onNavigate }: LoginPageProps) {
           <p>Har du inget konto än?</p>
           <button 
             className="link-button"
-            onClick={() => onNavigate('register')}
+            onClick={() => navigate('/register')}
           >
             Registrera dig här
           </button>
@@ -74,7 +72,7 @@ function LoginPage({ onNavigate }: LoginPageProps) {
         <div className="back-home">
           <button 
             className="back-button"
-            onClick={() => onNavigate('home')}
+            onClick={() => navigate('/home')}
           >
             ← Tillbaka till startsidan
           </button>

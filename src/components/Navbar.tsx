@@ -1,11 +1,12 @@
+import { useNavigate } from 'react-router';
 import './Navbar.css';
 
 interface NavbarProps {
   currentPage: string;
-  onNavigate: (page: string) => void;
 }
 
-function Navbar({ currentPage, onNavigate }: NavbarProps) {
+function Navbar({ currentPage }: NavbarProps) {
+  const navigate = useNavigate();
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -14,21 +15,21 @@ function Navbar({ currentPage, onNavigate }: NavbarProps) {
             src="/src/types/mattmlogo.png" 
             alt="Mattemästaren" 
             className="navbar-logo"
-            onClick={() => onNavigate('home')}
+            onClick={() => navigate('/home')}
           />
         </div>
         
         <div className="navbar-menu">
           <button 
             className={`nav-button ${currentPage === 'home' ? 'active' : ''}`}
-            onClick={() => onNavigate('home')}
+            onClick={() => navigate('/home')}
           >
             Hem
           </button>
           
           <button 
             className={`nav-button ${currentPage === 'exercises' ? 'active' : ''}`}
-            onClick={() => onNavigate('exercises')}
+            onClick={() => navigate('/exercises')}
           >
             Uppgifter
           </button>
@@ -36,13 +37,13 @@ function Navbar({ currentPage, onNavigate }: NavbarProps) {
           <div className="navbar-auth">
             <button 
               className="auth-button login-btn"
-              onClick={() => onNavigate('login')}
+              onClick={() => navigate('/login')}
             >
               Logga in
             </button>
             <button 
               className="auth-button register-btn"
-              onClick={() => onNavigate('register')}
+              onClick={() => navigate('/register')}
             >
               Registrera
             </button>
