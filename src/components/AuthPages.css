@@ -1,0 +1,221 @@
+
+
+.auth-page {
+  min-height: 100vh;
+  background-color: #f0f8ff;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  background-color: white;
+  border: 3px solid #4169e1;
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-header h1 {
+  color: #4169e1;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.auth-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.auth-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fafafa;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4169e1;
+  background-color: white;
+}
+
+.radio-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: all 0.3s;
+}
+
+.radio-option:hover {
+  border-color: #4169e1;
+  background-color: #e6f3ff;
+}
+
+.radio-option input[type="radio"]:checked + label,
+.radio-option:has(input[type="radio"]:checked) {
+  border-color: #4169e1;
+  background-color: #e6f3ff;
+  color: #4169e1;
+  font-weight: bold;
+}
+
+.form-actions {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.login-button {
+  background-color: #4169e1;
+  color: white;
+}
+
+.login-button:hover {
+  background-color: #2e4bc6;
+  transform: translateY(-2px);
+}
+
+.register-button {
+  background-color: #32cd32;
+  color: white;
+}
+
+.register-button:hover {
+  background-color: #228b22;
+  transform: translateY(-2px);
+}
+
+.auth-links {
+  margin-top: 15px;
+}
+
+.forgot-link {
+  color: #4169e1;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.auth-footer {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 2px dashed #ddd;
+}
+
+.auth-footer p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #4169e1;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.link-button:hover {
+  color: #2e4bc6;
+}
+
+.back-home {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.back-button {
+  background-color: #ffd700;
+  color: #333;
+  border: 2px solid #333;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.back-button:hover {
+  background-color: #ffcc00;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    margin: 10px;
+    padding: 20px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .radio-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .auth-header h1 {
+    font-size: 1.5rem;
+  }
+}
