@@ -77,14 +77,14 @@ function LoginPage() {
           </button>
         </div>
 
-        <div className="back-home">
+        {/* <div className="back-home">
           <button 
             className="back-button"
             onClick={() => navigate('/home')}
           >
             ← Tillbaka till startsidan
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

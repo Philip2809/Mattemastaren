@@ -196,49 +196,12 @@ function MathGame() {
                             </ul>
                         </div>
                     )}
-
-                    <div className="info-grid">
-                        <div className="info-item">
-                            <div className="info-label">Bonustid</div>
-                            <div className="info-value">{currentExercise.bonusTime}s</div>
-                        </div>
-                        <div className="info-item">
-                            <div className="info-label">Poäng</div>
-                            <div className="info-value">{currentExercise.points}</div>
-                        </div>
-                    </div>
                 </div>
             )}
 
             {feedback && (
                 <div className={`feedback ${feedback.includes('Fel svar') ? 'feedback-error' : 'feedback-success'}`}>
                     {feedback}
-                </div>
-            )}
-
-            {totalQuestions > 0 && (
-                <div className="info-section">
-                    <h3 className="info-title">
-                        Din statistik
-                    </h3>
-                    <div className="info-grid">
-                        <div className="info-item">
-                            <div className="info-label">Totala poäng</div>
-                            <div className="info-value">{score}</div>
-                        </div>
-                        <div className="info-item">
-                            <div className="info-label">Uppgifter gjorda</div>
-                            <div className="info-value">{totalQuestions}</div>
-                        </div>
-                        <div className="info-item">
-                            <div className="info-label">Framgång</div>
-                            <div className="info-value">{successRate}%</div>
-                        </div>
-                        <div className="info-item">
-                            <div className="info-label">Genomsnitt per uppgift</div>
-                            <div className="info-value">{Math.round(score / totalQuestions)} poäng</div>
-                        </div>
-                    </div>
                 </div>
             )}
 

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router';
 import './Navbar.css';
 import { userService } from '../fake-backend/user';
+import { useEffect } from 'react';
 
 function Navbar() {
     const navigate = useNavigate();
@@ -15,44 +16,42 @@ function Navbar() {
                         src="/src/types/mattmlogo.png"
                         alt="Mattemästaren"
                         className="navbar-logo"
-                        onClick={() => navigate('/home')}
+                        onClick={() => navigate('/exercises')}
                     />
                 </div>
 
                 <div className="navbar-menu">
-                    <button
-                        className={`nav-button ${location.pathname === '/home' ? 'active' : ''}`}
-                        onClick={() => navigate('/home')}
-                    >
-                        Hem
-                    </button>
 
-                    <button
-                        className={`nav-button ${location.pathname === '/exercises' ? 'active' : ''}`}
-                        onClick={() => navigate('/exercises')}
-                    >
-                        Uppgifter
-                    </button>
+                    {hasToken && (
+                        <>
+                            <button
+                                className={`nav-button ${location.pathname === '/exercises' ? 'active' : ''}`}
+                                onClick={() => navigate('/exercises')}
+                            >
+                                Uppgifter
+                            </button>
 
-                    <button
-                        className={`nav-button ${location.pathname === '/statistics' ? 'active' : ''}`}
-                        onClick={() => navigate('/statistics')}
-                    >
-                        Statistik
-                    </button>
+                            <button
+                                className={`nav-button ${location.pathname === '/statistics' ? 'active' : ''}`}
+                                onClick={() => navigate('/statistics')}
+                            >
+                                Statistik
+                            </button>
+                        </>
+                    )}
 
 
                     <div className="navbar-auth">
                         {hasToken ? (
                             <button
-                                    className="auth-button logout-btn"
-                                    onClick={() => {
-                                        localStorage.removeItem("token");
-                                        navigate('/login')
-                                    }}
-                                >
-                                    Logga out
-                                </button>
+                                className="auth-button logout-btn"
+                                onClick={() => {
+                                    localStorage.removeItem("token");
+                                    navigate('/login')
+                                }}
+                            >
+                                Logga out
+                            </button>
                         ) : (
                             <>
                                 <button
