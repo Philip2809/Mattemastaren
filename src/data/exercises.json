@@ -13,7 +13,7 @@
         "num2": { "min": 1, "max": 10 }
       },
       "answerFormula": "{{num1}} + {{num2}}",
-      "timeLimit": 30,
+      "bonusTime": 30,
       "points": 10,
       "hints": [
         "Räkna på fingrarna om du behöver",
@@ -33,7 +33,7 @@
         "num2": { "min": 1, "max": 10 }
       },
       "answerFormula": "{{num1}} - {{num2}}",
-      "timeLimit": 30,
+      "bonusTime": 30,
       "points": 10,
       "hints": [
         "Subtraktion betyder att ta bort",
@@ -53,7 +53,7 @@
         "num2": { "min": 1, "max": 5 }
       },
       "answerFormula": "{{num1}} * {{num2}}",
-      "timeLimit": 45,
+      "bonusTime": 45,
       "points": 15,
       "hints": [
         "Multiplikation är samma som att lägga ihop samma tal flera gånger",
@@ -74,7 +74,7 @@
       },
       "answerFormula": "{{dividend}} / {{divisor}}",
       "constraint": "{{dividend}} % {{divisor}} === 0",
-      "timeLimit": 45,
+      "bonusTime": 45,
       "points": 15,
       "hints": [
         "Division är motsatsen till multiplikation",
@@ -94,7 +94,7 @@
         "num2": { "min": 15, "max": 50 }
       },
       "answerFormula": "{{num1}} + {{num2}}",
-      "timeLimit": 60,
+      "bonusTime": 60,
       "points": 20,
       "hints": [
         "Dela upp talen i tior och ental för att göra det lättare",
@@ -114,7 +114,7 @@
         "num2": { "min": 10, "max": 40 }
       },
       "answerFormula": "{{num1}} - {{num2}}",
-      "timeLimit": 60,
+      "bonusTime": 60,
       "points": 20,
       "hints": [
         "Tänk på att dela upp talen i tior och ental",
@@ -134,7 +134,7 @@
         "num2": { "min": 1, "max": 10 }
       },
       "answerFormula": "{{num1}} * {{num2}}",
-      "timeLimit": 45,
+      "bonusTime": 45,
       "points": 25,
       "hints": [
         "Lär dig gångertabellerna utantill för snabbare räkning",
@@ -155,7 +155,7 @@
         "num3": { "min": 3, "max": 15 }
       },
       "answerFormula": "{{num1}} + {{num2}} - {{num3}}",
-      "timeLimit": 75,
+      "bonusTime": 75,
       "points": 30,
       "hints": [
         "Räkna från vänster till höger",
@@ -177,7 +177,7 @@
       },
       "answerFormula": "Math.max({{num1}}, {{num2}}, {{num3}})",
       "options": ["{{num1}}", "{{num2}}", "{{num3}}"],
-      "timeLimit": 30,
+      "bonusTime": 30,
       "points": 15,
       "hints": [
         "Jämför talen ett i taget",
@@ -199,7 +199,7 @@
         "num4": { "min": 1, "max": 100 }
       },
       "answerFormula": "[{{num1}}, {{num2}}, {{num3}}, {{num4}}].sort((a, b) => a - b)",
-      "timeLimit": 90,
+      "bonusTime": 90,
       "points": 35,
       "hints": [
         "Börja med att hitta det minsta talet",
