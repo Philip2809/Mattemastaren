@@ -266,4 +266,20 @@ function checkAnswer(exercise: any, studentAnswer: any) {
 }
 
 
-export { exercises, createRandomExercise, checkAnswer };
+const categories = {
+    "addition": { name: "Addition", icon: "➕", color: "#4CAF50" },
+    "subtraction": { name: "Subtraktion", icon: "➖", color: "#FF9800" },
+    "multiplication": { name: "Multiplikation", icon: "✖️", color: "#2196F3" },
+    "division": { name: "Division", icon: "➗", color: "#9C27B0" },
+    "mixed": { name: "Blandad räkning", icon: "", color: "#607D8B" },
+    "comparison": { name: "Jämförelse", icon: "", color: "#795548" },
+    "ordering": { name: "Ordning", icon: "", color: "#E91E63" }
+};
+
+const difficulties = {
+    "easy": { name: "Lätt", color: "#4CAF50" },
+    "medium": { name: "Medel", color: "#FF9800" },
+    "hard": { name: "Svår", color: "#F44336" }
+};
+
+export { exercises, createRandomExercise, checkAnswer, categories, difficulties };

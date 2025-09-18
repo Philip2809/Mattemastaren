@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import exercisesData from '../data/exercises.json';
+import { exercises, categories, difficulties } from '../exercises';
 import './StatisticsPage.css';
 
 interface ExerciseResult {
@@ -33,17 +33,17 @@ function StatisticsPage() {
     useEffect(() => {
         const mockData: UserStats = {
             "Philip": [
-                { exerciseId: "ex_001", correct: true, timeSpent: 15, points: 10, ended: Date.now() - 3600000 },
-                { exerciseId: "ex_002", correct: false, timeSpent: 45, points: 0, ended: Date.now() - 3000000 },
-                { exerciseId: "ex_003", correct: true, timeSpent: 25, points: 15, ended: Date.now() - 2400000 },
-                { exerciseId: "ex_005", correct: true, timeSpent: 35, points: 20, ended: Date.now() - 1800000 },
-                { exerciseId: "ex_007", correct: false, timeSpent: 60, points: 0, ended: Date.now() - 1200000 },
+                { exerciseId: "1", correct: true, timeSpent: 15, points: 10, ended: Date.now() - 3600000 },
+                { exerciseId: "2", correct: false, timeSpent: 45, points: 0, ended: Date.now() - 3000000 },
+                { exerciseId: "3", correct: true, timeSpent: 25, points: 15, ended: Date.now() - 2400000 },
+                { exerciseId: "5", correct: true, timeSpent: 35, points: 20, ended: Date.now() - 1800000 },
+                { exerciseId: "7", correct: false, timeSpent: 60, points: 0, ended: Date.now() - 1200000 },
             ],
             "Wissam": [
-                { exerciseId: "ex_001", correct: true, timeSpent: 12, points: 10, ended: Date.now() - 3300000 },
-                { exerciseId: "ex_002", correct: true, timeSpent: 22, points: 10, ended: Date.now() - 2700000 },
-                { exerciseId: "ex_004", correct: false, timeSpent: 55, points: 0, ended: Date.now() - 2100000 },
-                { exerciseId: "ex_006", correct: true, timeSpent: 40, points: 20, ended: Date.now() - 1500000 },
+                { exerciseId: "1", correct: true, timeSpent: 12, points: 10, ended: Date.now() - 3300000 },
+                { exerciseId: "2", correct: true, timeSpent: 22, points: 10, ended: Date.now() - 2700000 },
+                { exerciseId: "4", correct: false, timeSpent: 55, points: 0, ended: Date.now() - 2100000 },
+                { exerciseId: "6", correct: true, timeSpent: 40, points: 20, ended: Date.now() - 1500000 },
             ]
         };
 
@@ -59,7 +59,7 @@ function StatisticsPage() {
         };
 
         results.forEach(result => {
-            const exercise = exercisesData.exercises.find(ex => ex.id === result.exerciseId);
+            const exercise = exercises.find(ex => ex.id.toString() === result.exerciseId);
             if (exercise) {
                 const difficulty = exercise.difficulty as keyof DifficultyStats;
                 stats[difficulty].total++;
@@ -76,7 +76,7 @@ function StatisticsPage() {
         const stats: CategoryStats = {};
 
         results.forEach(result => {
-            const exercise = exercisesData.exercises.find(ex => ex.id === result.exerciseId);
+            const exercise = exercises.find(ex => ex.id.toString() === result.exerciseId);
             if (exercise) {
                 const category = exercise.category;
                 if (!stats[category]) {
@@ -125,7 +125,7 @@ function StatisticsPage() {
     };
 
     const getCategoryIcon = (category: string): string => {
-        const categoryData = exercisesData.categories[category as keyof typeof exercisesData.categories];
+        const categoryData = categories[category as keyof typeof categories];
         return categoryData?.icon || '📊';
     };
 
@@ -205,7 +205,7 @@ function StatisticsPage() {
                                         className="difficulty-header"
                                         style={{ backgroundColor: getDifficultyColor(difficulty) }}
                                     >
-                                        <h3>{exercisesData.difficulties[difficulty as keyof typeof exercisesData.difficulties]?.name || difficulty}</h3>
+                                        <h3>{difficulties[difficulty as keyof typeof difficulties]?.name || difficulty}</h3>
                                     </div>
                                     <div className="difficulty-content">
                                         <p>Du har gjort <strong>{stats.total}</strong> uppgifter med {difficulty} svårighetsgrad</p>
@@ -233,7 +233,7 @@ function StatisticsPage() {
                     <div className="category-stats">
                         {Object.entries(categoryStats).map(([category, stats]) => {
                             const successRate = stats.total > 0 ? (stats.correct / stats.total) * 100 : 0;
-                            const categoryData = exercisesData.categories[category as keyof typeof exercisesData.categories];
+                            const categoryData = categories[category as keyof typeof categories];
                             
                             return (
                                 <div key={category} className="category-card">
