@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { exercises, categories, difficulties } from '../exercises';
 import './StatisticsPage.css';
+import { exercisesService } from '../fake-backend/exercises';
 
 interface ExerciseResult {
     exerciseId: string;
@@ -31,24 +32,10 @@ function StatisticsPage() {
     const [currentUser, setCurrentUser] = useState<string>('');
 
     useEffect(() => {
-        const mockData: UserStats = {
-            "Philip": [
-                { exerciseId: "1", correct: true, timeSpent: 15, points: 10, ended: Date.now() - 3600000 },
-                { exerciseId: "2", correct: false, timeSpent: 45, points: 0, ended: Date.now() - 3000000 },
-                { exerciseId: "3", correct: true, timeSpent: 25, points: 15, ended: Date.now() - 2400000 },
-                { exerciseId: "5", correct: true, timeSpent: 35, points: 20, ended: Date.now() - 1800000 },
-                { exerciseId: "7", correct: false, timeSpent: 60, points: 0, ended: Date.now() - 1200000 },
-            ],
-            "Wissam": [
-                { exerciseId: "1", correct: true, timeSpent: 12, points: 10, ended: Date.now() - 3300000 },
-                { exerciseId: "2", correct: true, timeSpent: 22, points: 10, ended: Date.now() - 2700000 },
-                { exerciseId: "4", correct: false, timeSpent: 55, points: 0, ended: Date.now() - 2100000 },
-                { exerciseId: "6", correct: true, timeSpent: 40, points: 20, ended: Date.now() - 1500000 },
-            ]
-        };
-
-        setUserStats(mockData);
-        setCurrentUser("Philip");
+        exercisesService.getStatsData(localStorage.getItem('token') || '').then(res => {
+            setUserStats(res);
+            setCurrentUser(Object.keys(res)[0] || '');
+        });
     }, []);
 
     const calculateDifficultyStats = (results: ExerciseResult[]): DifficultyStats => {
@@ -59,7 +46,7 @@ function StatisticsPage() {
         };
 
         results.forEach(result => {
-            const exercise = exercises.find(ex => ex.id.toString() === result.exerciseId);
+            const exercise = exercises.find(ex => ex.id.toString() === result.exerciseId.toString());
             if (exercise) {
                 const difficulty = exercise.difficulty as keyof DifficultyStats;
                 stats[difficulty].total++;
@@ -76,7 +63,7 @@ function StatisticsPage() {
         const stats: CategoryStats = {};
 
         results.forEach(result => {
-            const exercise = exercises.find(ex => ex.id.toString() === result.exerciseId);
+            const exercise = exercises.find(ex => ex.id.toString() === result.exerciseId.toString());
             if (exercise) {
                 const category = exercise.category;
                 if (!stats[category]) {
@@ -89,7 +76,6 @@ function StatisticsPage() {
                 }
             }
         });
-
         return stats;
     };
 
@@ -201,7 +187,7 @@ function StatisticsPage() {
                             const successRate = stats.total > 0 ? (stats.correct / stats.total) * 100 : 0;
                             return (
                                 <div key={difficulty} className="difficulty-card">
-                                    <div 
+                                    <div
                                         className="difficulty-header"
                                         style={{ backgroundColor: getDifficultyColor(difficulty) }}
                                     >
@@ -211,9 +197,9 @@ function StatisticsPage() {
                                         <p>Du har gjort <strong>{stats.total}</strong> uppgifter med {difficulty} svårighetsgrad</p>
                                         <p>Du har klarat av <strong>{stats.correct}</strong> av dem</p>
                                         <div className="progress-bar">
-                                            <div 
-                                                className="progress-fill" 
-                                                style={{ 
+                                            <div
+                                                className="progress-fill"
+                                                style={{
                                                     width: `${successRate}%`,
                                                     backgroundColor: getDifficultyColor(difficulty)
                                                 }}
@@ -234,7 +220,7 @@ function StatisticsPage() {
                         {Object.entries(categoryStats).map(([category, stats]) => {
                             const successRate = stats.total > 0 ? (stats.correct / stats.total) * 100 : 0;
                             const categoryData = categories[category as keyof typeof categories];
-                            
+
                             return (
                                 <div key={category} className="category-card">
                                     <div className="category-header">
@@ -255,9 +241,9 @@ function StatisticsPage() {
                                             <span><strong>{Math.round(successRate)}%</strong></span>
                                         </div>
                                         <div className="progress-bar">
-                                            <div 
-                                                className="progress-fill" 
-                                                style={{ 
+                                            <div
+                                                className="progress-fill"
+                                                style={{
                                                     width: `${successRate}%`,
                                                     backgroundColor: categoryData?.color || '#607D8B'
                                                 }}

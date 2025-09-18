@@ -10,7 +10,7 @@ function Router() {
 
     return (
         <>
-            <Navbar currentPage={'home'} /><Routes>
+            <Navbar /><Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<MathGame />} />
                 <Route path="/exercises" element={<MathGame />} />

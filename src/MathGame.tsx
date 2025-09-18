@@ -88,9 +88,6 @@ function MathGame() {
             question: currentExercise.question,
             studentAnswer: studentAnswer.trim(),
         })
-
-        const test = await exercisesService.getStatsData(localStorage.getItem('token') || '');
-        console.log(test);
     }
 
     // Växla tips

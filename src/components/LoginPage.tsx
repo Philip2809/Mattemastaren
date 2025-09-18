@@ -1,7 +1,7 @@
 // Login sida - backend kommer att läggas till senare
 import { useState } from 'react';
 import './AuthPages.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { userService } from '../fake-backend/user';
 
 function LoginPage() {

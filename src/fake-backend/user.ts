@@ -13,7 +13,8 @@ export const userService = {
     login,
     verifyUser,
     hasToken,
-    verifyToken
+    verifyToken,
+    getUserNames
 }
 
 export interface RegisterUser {
@@ -47,6 +48,15 @@ async function verifyUser(token: string, userId: string) {
     const { payload } = await jose.jwtVerify(token, SECRET);
     if (payload.id !== userId) return false;
     return true;
+}
+
+async function getUserNames(userIds: string[]) {
+    const users = await userDb.getUsers(userIds);
+    const names: {[key: string]: string} = {};
+    users.forEach(u => {
+        names[u.id] = u.name;
+    });
+    return names;
 }
 
 async function login(username: string, password: string) {

@@ -37,10 +37,12 @@ async function getStatsData(token: string) {
     const userId = await userService.verifyToken(token);
     if (!userId) return false;
     const exercises = await exercisesDb.getExercises([userId]);
+    const names = await userService.getUserNames([userId]);
 
     const data = {} as any;
     [userId].forEach(id => {
-        data[id] = exercises.filter(e => e.userId === id);
+        const name = names[id] || "Okänd användare";
+        data[name] = exercises.filter(e => e.userId === id);
     });
 
     return data;

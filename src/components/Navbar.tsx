@@ -1,12 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import './Navbar.css';
 import { userService } from '../fake-backend/user';
 
-interface NavbarProps {
-    currentPage: string;
-}
-
-function Navbar({ currentPage }: NavbarProps) {
+function Navbar() {
     const navigate = useNavigate();
 
     const hasToken = userService.hasToken();
@@ -39,7 +35,7 @@ function Navbar({ currentPage }: NavbarProps) {
                     </button>
 
                     <button
-                        className={`nav-button ${currentPage === 'statistics' ? 'active' : ''}`}
+                        className={`nav-button ${location.pathname === '/statistics' ? 'active' : ''}`}
                         onClick={() => navigate('/statistics')}
                     >
                         Statistik
