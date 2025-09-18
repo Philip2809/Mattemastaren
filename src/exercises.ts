@@ -11,7 +11,8 @@ const exercises = [
     minNum2: 1, 
     maxNum2: 10,
     operation: "+",
-    timeLimit: 30,
+    bonusTime: 30,
+    penaltyTime: 60,
     points: 10,
     tips: ["Räkna på fingrarna om du behöver", "Addition betyder att lägga ihop"]
   },
@@ -26,7 +27,8 @@ const exercises = [
     minNum2: 1,
     maxNum2: 10,
     operation: "-",
-    timeLimit: 30,
+    bonusTime: 30,
+    penaltyTime: 60,
     points: 10,
     tips: ["Subtraktion betyder att ta bort", "Räkna bakåt från det första talet"]
   },
@@ -41,7 +43,8 @@ const exercises = [
     minNum2: 1,
     maxNum2: 5,
     operation: "*",
-    timeLimit: 45,
+    bonusTime: 45,
+    penaltyTime: 90,
     points: 15,
     tips: ["3 × 4 är samma som 3 + 3 + 3 + 3", "Lär dig tabellerna utantill"]
   },
@@ -56,7 +59,8 @@ const exercises = [
       [10, 2], [10, 5], [12, 3], [12, 4], [14, 2], [15, 3], [15, 5], [16, 4], [18, 2], [18, 3], [20, 4], [20, 5]
     ],
     operation: "/",
-    timeLimit: 45,
+    bonusTime: 45,
+    penaltyTime: 90,
     points: 15,
     tips: ["Division är motsatsen till multiplikation", "Vilket tal gånger divisorn blir lika med det första talet?"]
   },
@@ -71,7 +75,8 @@ const exercises = [
     minNum2: 15,
     maxNum2: 50,
     operation: "+",
-    timeLimit: 60,
+    bonusTime: 60,
+    penaltyTime: 120,
     points: 20,
     tips: ["Dela upp i tior och ental", "23 + 17 = (20+10) + (3+7) = 40"]
   },
@@ -86,7 +91,8 @@ const exercises = [
     minNum2: 10,
     maxNum2: 40,
     operation: "-",
-    timeLimit: 60,
+    bonusTime: 60,
+    penaltyTime: 120,
     points: 20,
     tips: ["Dela upp i tior och ental", "Kom ihåg att 1 tiotal = 10 ental när du lånar"]
   },
@@ -101,7 +107,8 @@ const exercises = [
     minNum2: 1,
     maxNum2: 10,
     operation: "*",
-    timeLimit: 45,
+    bonusTime: 45,
+    penaltyTime: 90,
     points: 25,
     tips: ["Lär dig tabellerna utantill", "9 × 7 = 9 × (10-3) = 90-27 = 63"]
   },
@@ -118,7 +125,8 @@ const exercises = [
     minNum3: 3,
     maxNum3: 15,
     operation: "mixed", 
-    timeLimit: 75,
+    bonusTime: 75,
+    penaltyTime: 150,
     points: 30,
     tips: ["Räkna från vänster till höger", "Först plus, sedan minus"]
   },
@@ -135,7 +143,8 @@ const exercises = [
     minNum3: 1,
     maxNum3: 50,
     operation: "max",
-    timeLimit: 30,
+    bonusTime: 30,
+    penaltyTime: 60,
     points: 15,
     tips: ["Jämför talen ett i taget", "Titta först på antalet siffror, sedan första siffran"]
   },
@@ -154,7 +163,8 @@ const exercises = [
     minNum4: 1,
     maxNum4: 50,
     operation: "sort",
-    timeLimit: 90,
+    bonusTime: 90,
+    penaltyTime: 180,
     points: 35,
     tips: ["Börja med att hitta det minsta talet", "Jämför talen två och två"]
   }
@@ -236,7 +246,8 @@ function createRandomExercise(category = null, difficulty = null) {
     description: exercise.description,
     question: question,
     correctAnswer: correctAnswer,
-    timeLimit: exercise.timeLimit,
+    bonusTime: exercise.bonusTime,
+    penaltyTime: exercise.penaltyTime,
     points: exercise.points,
     tips: exercise.tips,
     numbers: { num1, num2, num3, num4 } 

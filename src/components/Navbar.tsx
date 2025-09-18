@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { userService } from '../fake-backend/user';
-import { FaRegUserCircle } from 'react-icons/fa';
 
 interface NavbarProps {
     currentPage: string;
@@ -38,6 +37,14 @@ function Navbar({ currentPage }: NavbarProps) {
                     >
                         Uppgifter
                     </button>
+
+                    <button
+                        className={`nav-button ${currentPage === 'statistics' ? 'active' : ''}`}
+                        onClick={() => navigate('/statistics')}
+                    >
+                        Statistik
+                    </button>
+
 
                     <div className="navbar-auth">
                         {hasToken ? (

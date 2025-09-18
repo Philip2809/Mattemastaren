@@ -1,0 +1,223 @@
+.exercise-timer {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.timer-bonus {
+    border-color: #4CAF50;
+    background: #f9f9f9;
+}
+
+.timer-normal {
+    border-color: #FF9800;
+    background: #f9f9f9;
+}
+
+.timer-penalty {
+    border-color: #F44336;
+    background: #f9f9f9;
+}
+
+
+.timer-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.timer-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.timer-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.timer-status {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.status-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #555;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    display: inline-block;
+}
+
+.timer-bonus .status-text {
+    background: #e8f5e8;
+    color: #2e7d32;
+}
+
+.timer-normal .status-text {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.timer-penalty .status-text {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.timer-progress {
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    position: relative;
+    height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.bonus-fill {
+    background: linear-gradient(90deg, #4CAF50, #66BB6A);
+}
+
+.normal-fill {
+    background: linear-gradient(90deg, #FF9800, #FFB74D);
+}
+
+.penalty-fill {
+    background: linear-gradient(90deg, #F44336, #EF5350);
+    width: 100% !important;
+}
+
+.pulse {
+    animation: pulse-fill 1.5s infinite;
+}
+
+@keyframes pulse-fill {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.timer-milestones {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.milestone {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.milestone-time {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.milestone-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .exercise-timer {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .timer-header {
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+    
+    .timer-icon {
+        font-size: 1.5rem;
+    }
+    
+    .timer-display {
+        font-size: 2rem;
+    }
+    
+    .status-text {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+    
+    .progress-bar {
+        height: 10px;
+    }
+    
+    .progress-label {
+        font-size: 0.7rem;
+    }
+    
+    .timer-milestones {
+        gap: 8px;
+    }
+    
+    .milestone {
+        padding: 8px;
+    }
+    
+    .milestone-time {
+        font-size: 0.9rem;
+    }
+    
+    .milestone-label {
+        font-size: 0.7rem;
+    }
+}
+
+/* Tillgänglighet */
+@media (prefers-reduced-motion: reduce) {
+    .progress-fill {
+        transition: none;
+    }
+}

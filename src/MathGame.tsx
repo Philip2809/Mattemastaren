@@ -1,6 +1,7 @@
 // Matematikspel
 import { useState } from 'react';
 import { createRandomExercise, checkAnswer } from './exercises';
+import ExerciseTimer from './components/ExerciseTimer';
 import './Home.css';
 
 function MathGame() {
@@ -11,6 +12,9 @@ function MathGame() {
     const [startTime, setStartTime] = useState<number | null>(null);
     const [score, setScore] = useState(0);
     const [totalQuestions, setTotalQuestions] = useState(0);
+    const [isTimerRunning, setIsTimerRunning] = useState(false);
+    const [timeStatus, setTimeStatus] = useState<'bonus' | 'normal' | 'penalty'>('bonus');
+    const [elapsedTime, setElapsedTime] = useState(0);
 
     // Skapa ny uppgift
     function newExercise(category: any = null, difficulty: any = null) {
@@ -21,6 +25,9 @@ function MathGame() {
             setFeedback('');
             setShowHints(false);
             setStartTime(Date.now());
+            setIsTimerRunning(true);
+            setElapsedTime(0);
+            setTimeStatus('bonus');
         } catch (error) {
             setFeedback('Något gick fel när uppgiften skapades');
         }
@@ -42,21 +49,23 @@ function MathGame() {
         }
 
         const isCorrect = checkAnswer(currentExercise, answer);
-        const timeSpent = Math.floor((Date.now() - (startTime || 0)) / 1000);
-
+        const timeSpent = elapsedTime;
+        
+        setIsTimerRunning(false);
         setTotalQuestions(totalQuestions + 1);
 
         if (isCorrect) {
             let points = currentExercise.points;
 
-            if (timeSpent <= currentExercise.timeLimit / 2) {
+            // Justera poäng baserat på tidsstatus
+            if (timeStatus === 'bonus') {
                 points = Math.floor(points * 1.5);
                 setFeedback(`Bra jobbat! Snabbt på ${timeSpent}s! (+${points} poäng med bonus)`);
-            } else if (timeSpent <= currentExercise.timeLimit) {
+            } else if (timeStatus === 'normal') {
                 setFeedback(`Rätt svar! Du löste det på ${timeSpent} sekunder (+${points} poäng)`);
             } else {
-                points = Math.floor(points * 0.8);
-                setFeedback(`Rätt svar, men försök vara snabbare (+${points} poäng)`);
+                points = Math.floor(points * 0.5);
+                setFeedback(`Rätt svar, men försök vara snabbare (+${points} poäng med tidsavdrag)`);
             }
 
             setScore(score + points);
@@ -72,6 +81,11 @@ function MathGame() {
     function toggleHints() {
         setShowHints(!showHints);
     }
+
+    const handleTimeUpdate = (time: number, status: 'bonus' | 'normal' | 'penalty') => {
+        setElapsedTime(time);
+        setTimeStatus(status);
+    };
 
     const successRate = totalQuestions > 0 ? Math.round((score / (totalQuestions * 20)) * 100) : 0;
 
@@ -99,6 +113,15 @@ function MathGame() {
 
             {currentExercise && (
                 <div className="exercise-card">
+                    {isTimerRunning && (
+                        <ExerciseTimer
+                            bonusTime={currentExercise.bonusTime}
+                            penaltyTime={currentExercise.penaltyTime}
+                            onTimeUpdate={handleTimeUpdate}
+                            isRunning={isTimerRunning}
+                        />
+                    )}
+                    
                     <div className="exercise-header">
                         <h2 className="exercise-title">
                             {currentExercise.title}
@@ -163,8 +186,8 @@ function MathGame() {
 
                     <div className="info-grid">
                         <div className="info-item">
-                            <div className="info-label">Tidsgräns</div>
-                            <div className="info-value">{currentExercise.timeLimit}s</div>
+                            <div className="info-label">Bonustid</div>
+                            <div className="info-value">{currentExercise.bonusTime}s</div>
                         </div>
                         <div className="info-item">
                             <div className="info-label">Poäng</div>
