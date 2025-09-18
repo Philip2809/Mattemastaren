@@ -26,14 +26,14 @@ function Navbar({ currentPage }: NavbarProps) {
 
                 <div className="navbar-menu">
                     <button
-                        className={`nav-button ${currentPage === 'home' ? 'active' : ''}`}
+                        className={`nav-button ${location.pathname === '/home' ? 'active' : ''}`}
                         onClick={() => navigate('/home')}
                     >
                         Hem
                     </button>
 
                     <button
-                        className={`nav-button ${currentPage === 'exercises' ? 'active' : ''}`}
+                        className={`nav-button ${location.pathname === '/exercises' ? 'active' : ''}`}
                         onClick={() => navigate('/exercises')}
                     >
                         Uppgifter

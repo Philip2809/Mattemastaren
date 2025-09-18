@@ -13,7 +13,7 @@ function Router() {
         <>
             <Navbar currentPage={'home'} /><Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/home" element={<MathGame />} />
+                <Route path="/exercises" element={<MathGame />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
 

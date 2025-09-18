@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { createRandomExercise, checkAnswer } from './exercises';
 import './Home.css';
+import { exercisesService } from './fake-backend/exercises';
 
 function MathGame() {
     const [currentExercise, setCurrentExercise] = useState<any>(null);
@@ -27,7 +28,7 @@ function MathGame() {
     }
 
     // Kolla svaret
-    function checkStudentAnswer() {
+    async function checkStudentAnswer() {
         if (!currentExercise || !studentAnswer.trim()) {
             setFeedback('Du måste skriva ett svar först!');
             return;
@@ -46,8 +47,10 @@ function MathGame() {
 
         setTotalQuestions(totalQuestions + 1);
 
+        let points = 0;
+
         if (isCorrect) {
-            let points = currentExercise.points;
+            points = currentExercise.points;
 
             if (timeSpent <= currentExercise.timeLimit / 2) {
                 points = Math.floor(points * 1.5);
@@ -66,6 +69,19 @@ function MathGame() {
                 : currentExercise.correctAnswer;
             setFeedback(`Fel svar. Det rätta svaret är: ${correctAnswer}. Försök igen!`);
         }
+
+        exercisesService.register(localStorage.getItem('token') || '', {
+            exerciseId: currentExercise.id,
+            correct: isCorrect,
+            points,
+            timeSpent,
+            ended: Date.now(),
+            question: currentExercise.question,
+            studentAnswer: studentAnswer.trim(),
+        })
+
+        const test = await exercisesService.getStatsData(localStorage.getItem('token') || '');
+        console.log(test);
     }
 
     // Växla tips

@@ -30,11 +30,11 @@ const SECRET = new TextEncoder().encode('newton-sysm8-demo-project');
 
 async function verifyToken(token:string) {
     try {
-        await jose.jwtVerify(token, SECRET);
+        const jwt = await jose.jwtVerify(token, SECRET);
+        return jwt.payload.id as string;
     } catch (e) {
         return false;
     }
-    return true;
 }
 
 function hasToken() {
