@@ -12,6 +12,7 @@ export const userService = {
     register,
     login,
     verifyUser,
+    hasToken,
     verifyToken
 }
 
@@ -33,6 +34,12 @@ async function verifyToken(token:string) {
     } catch (e) {
         return false;
     }
+    return true;
+}
+
+function hasToken() {
+    const token = localStorage.getItem("token");
+    if (!token) return false;
     return true;
 }
 

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import './AuthPages.css';
 import { useNavigate } from 'react-router';
+import { userService } from '../fake-backend/user';
 
 
 function RegisterPage() {
@@ -9,7 +10,7 @@ function RegisterPage() {
   const [userType, setUserType] = useState('student');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [classCode, setClassCode] = useState('');
@@ -19,15 +20,19 @@ function RegisterPage() {
     e.preventDefault();
     // TODO: Backend integration kommer här / för Phillip
     console.log('Register attempt:', { 
-      userType, firstName, lastName, email, password, classCode, parentEmail 
+      userType, firstName, lastName, email: username, password, classCode, parentEmail 
     });
     
     if (password !== confirmPassword) {
       alert('Lösenorden matchar inte!');
       return;
     }
-    
-    alert('Registrering funktionalitet kommer att implementeras senare!');
+
+    userService.register({ 
+        name: firstName + ' ' + lastName, 
+        username, 
+        password: password
+    }).then(() => navigate('/login'));
   };
 
   return (
@@ -99,13 +104,13 @@ function RegisterPage() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">E-postadress:</label>
+            <label htmlFor="username">E-postadress:</label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="din.email@exempel.se"
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="kalle.anka"
               required
             />
           </div>

@@ -2,17 +2,25 @@
 import { useState } from 'react';
 import './AuthPages.css';
 import { useNavigate } from 'react-router';
+import { userService } from '../fake-backend/user';
 
 function LoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Backend integration kommer här / för Phillip
-    console.log('Login attempt:', { email, password });
-    alert('Login funktionalitet kommer att implementeras senare!');
+    userService.login(userName, password).then(res => {
+        if (!res) {
+            alert('Fel inloggning, försök igen!');
+            return;
+        }
+
+        // Res is then token
+        localStorage.setItem("token", res);
+        navigate('/exercises');
+    })
   };
 
   return (
@@ -25,13 +33,13 @@ function LoginPage() {
 
         <form className="auth-form" onSubmit={handleLogin}>
           <div className="form-group">
-            <label htmlFor="email">E-postadress:</label>
+            <label htmlFor="username">Användarnamn:</label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="din.email@exempel.se"
+              type="text"
+              id="username"
+              value={userName}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="kalle.anka"
               required
             />
           </div>
