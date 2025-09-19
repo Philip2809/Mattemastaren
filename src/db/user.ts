@@ -1,3 +1,4 @@
+import type { AxiosRequestConfig } from "axios";
 import type { User } from "../fake-backend/user";
 import { httpClient } from "./client";
 
@@ -20,7 +21,7 @@ async function getUser(username: string) {
     return res.data[0] as User;
 }
 
-async function getUsers(userIds: string[]) {
-    const res = await httpClient.get<User[]>(`/users`, { params: { id: userIds } });
+async function getUsers(params: AxiosRequestConfig['params']) {
+    const res = await httpClient.get<User[]>(`/users`, { params });
     return res.data;
 }

@@ -4,6 +4,8 @@ import { createRandomExercise, checkAnswer } from './exercises';
 import ExerciseTimer from './components/ExerciseTimer';
 import './Home.css';
 import { exercisesService } from './fake-backend/exercises';
+import { userService } from './fake-backend/user';
+import { useNavigate } from 'react-router';
 
 function MathGame() {
     const [currentExercise, setCurrentExercise] = useState<any>(null);
@@ -17,8 +19,16 @@ function MathGame() {
     const [timeStatus, setTimeStatus] = useState<'bonus' | 'normal' | 'penalty'>('bonus');
     const [elapsedTime, setElapsedTime] = useState(0);
 
+    const navigate = useNavigate();
+
     // Skapa ny uppgift
-    function newExercise(category: any = null, difficulty: any = null) {
+    async function newExercise(category: any = null, difficulty: any = null) {
+        const userType = await userService.verifyUserType(localStorage.getItem('token') || '');
+        if (userType !== 'student') {
+            setFeedback('Endast elever kan träna på uppgifter.');
+            navigate('/statistics');
+            return;
+        }
         try {
             const exercise = createRandomExercise(category, difficulty);
             setCurrentExercise(exercise);

@@ -30,6 +30,7 @@ function StatisticsPage() {
     const navigate = useNavigate();
     const [userStats, setUserStats] = useState<UserStats>({});
     const [currentUser, setCurrentUser] = useState<string>('');
+    const currentUserType = localStorage.getItem('userType');
 
     useEffect(() => {
         exercisesService.getStatsData(localStorage.getItem('token') || '').then(res => {
@@ -138,8 +139,12 @@ function StatisticsPage() {
         <div className="statistics-page">
             <div className="statistics-container">
                 <div className="statistics-header">
-                    <h1>Din statistik, {currentUser}</h1>
-                    <p>Här ser du din progress i Mattemästaren</p>
+                    <h1>{currentUserType === 'student' && 'Din statistik, '}{currentUser}</h1>
+                    <p>{currentUserType === 'student' ? 
+                        'Här ser du din progress i Mattemästaren' : 
+                        currentUserType === 'teacher' ? 
+                        'Här ser du din elevs progress i Mattemästaren' :
+                        'Här ser du ditt barns progress i Mattemästaren'}</p>
                 </div>
 
                 {/* Översikt */}

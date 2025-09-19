@@ -26,7 +26,10 @@ function RegisterPage() {
     userService.register({ 
         name: firstName + ' ' + lastName, 
         username, 
-        password: password
+        password: password,
+        type: userType as 'student' | 'teacher' | 'parent',
+        classCode: userType === 'student' ? classCode : userType === 'teacher' ? Math.random().toString(36).slice(2, 8).toUpperCase() : undefined,
+        parentUsername: userType === 'student' ? parentUsername : undefined
     }).then(() => navigate('/login'));
   };
 

@@ -14,13 +14,18 @@ export const userService = {
     verifyUser,
     hasToken,
     verifyToken,
-    getUserNames
+    getUserNames,
+    verifyUserType,
+    verifyTeacherClassCode
 }
 
 export interface RegisterUser {
     name: string;
     username: string;
     password: string;
+    type: 'student' | 'teacher'| 'parent';
+    classCode?: string;
+    parentUsername?: string;
 }
 
 export interface User extends RegisterUser {
@@ -33,6 +38,25 @@ async function verifyToken(token:string) {
     try {
         const jwt = await jose.jwtVerify(token, SECRET);
         return jwt.payload.id as string;
+    } catch (e) {
+        return false;
+    }
+}
+
+async function verifyUserType(token:string) {
+    try {
+        const jwt = await jose.jwtVerify(token, SECRET);
+        return jwt.payload.type as 'student' | 'teacher'| 'parent';
+    } catch (e) {
+        return false;
+    }
+}
+
+async function verifyTeacherClassCode(token:string) {
+    try {
+        const jwt = await jose.jwtVerify(token, SECRET);
+        if (jwt.payload.type !== 'teacher') return false;
+        return jwt.payload.code as string;
     } catch (e) {
         return false;
     }
@@ -51,7 +75,7 @@ async function verifyUser(token: string, userId: string) {
 }
 
 async function getUserNames(userIds: string[]) {
-    const users = await userDb.getUsers(userIds);
+    const users = await userDb.getUsers({ id: userIds });
     const names: {[key: string]: string} = {};
     users.forEach(u => {
         names[u.id] = u.name;
@@ -69,7 +93,7 @@ async function login(username: string, password: string) {
     // JWT SHOULD NOT BE DONE THIS WAY!!!
     // JWT should be signed by a key, not a string. JWT should have a access token and a refresh token; access token in memory and refresh token in a http only cookie
     // Once again, this is just for demo purposes and should never be used in production
-    const token = await new jose.SignJWT({ id: user.id, username: user.username })
+    const token = await new jose.SignJWT({ id: user.id, username: user.username, type: user.type, code: user.classCode })
         .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
         .sign(SECRET);
     return token;

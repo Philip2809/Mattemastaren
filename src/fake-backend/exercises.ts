@@ -3,6 +3,7 @@
 */
 
 import { exercisesDb } from "../db/exercises";
+import { userDb } from "../db/user";
 import { userService } from "./user";
 
 export const exercisesService = {
@@ -36,14 +37,29 @@ async function register(token: string, result: ExerciseResult) {
 async function getStatsData(token: string) {
     const userId = await userService.verifyToken(token);
     if (!userId) return false;
-    const exercises = await exercisesDb.getExercises([userId]);
-    const names = await userService.getUserNames([userId]);
+    const userType = await userService.verifyUserType(token);
+    let userIds = [] as string[];
+    if (userType === 'student') {
+        userIds = [userId];
+    } else if (userType === 'teacher') {
+        const classCode = await userService.verifyTeacherClassCode(token);
+        const students = await userDb.getUsers({ type: 'student', classCode });
+        userIds = students.map(s => s.id);
+    } else if (userType === 'parent') {
+        const parent = (await userDb.getUsers({ id: await userService.verifyToken(token) }))[0];
+        if (!parent) return false;
+        const students = await userDb.getUsers({ type: 'student', parentUsername: parent.username });
+        userIds = students.map(s => s.id);
+    }
+    const exercises = await exercisesDb.getExercises(userIds);
+    const names = await userService.getUserNames(userIds);
 
     const data = {} as any;
-    [userId].forEach(id => {
+    userIds.forEach(id => {
         const name = names[id] || "Okänd användare";
         data[name] = exercises.filter(e => e.userId === id);
     });
 
+    console.log(data);
     return data;
 }

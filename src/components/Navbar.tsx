@@ -1,12 +1,25 @@
 import { useNavigate } from 'react-router';
 import './Navbar.css';
 import { userService } from '../fake-backend/user';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function Navbar() {
     const navigate = useNavigate();
 
     const hasToken = userService.hasToken();
+    const [classCode, setClassCode] = useState<string | null>(null);
+    const [userType, setUserType] = useState<'student' | 'teacher' | 'parent' | null>(null);
+
+
+    // This is not the best way to do this but it works for now, the way this should be done is via a context; but it overkill for this demo thing
+    if (localStorage.getItem('userType') !== userType) {
+        setClassCode(localStorage.getItem('classCode'));
+        setUserType(localStorage.getItem('userType') as 'student' | 'teacher' | 'parent' || null);
+    }
+    useEffect(() => {
+        setClassCode(localStorage.getItem('classCode'));
+        setUserType(localStorage.getItem('userType') as 'student' | 'teacher' | 'parent' || null);  
+    }, [localStorage.getItem('userType')]);
 
     return (
         <nav className="navbar">
@@ -20,17 +33,24 @@ function Navbar() {
                     />
                 </div>
 
+                {classCode && (
+                    <div className="class-code" style={{ color: 'white', fontWeight: 'bold' }}>
+                        Din klasskod: <strong>{classCode}</strong>
+                    </div>
+                )}
+
                 <div className="navbar-menu">
 
                     {hasToken && (
                         <>
-                            <button
-                                className={`nav-button ${location.pathname === '/exercises' ? 'active' : ''}`}
-                                onClick={() => navigate('/exercises')}
-                            >
-                                Uppgifter
-                            </button>
-
+                            {userType === 'student' && (
+                                <button
+                                    className={`nav-button ${location.pathname === '/exercises' ? 'active' : ''}`}
+                                    onClick={() => navigate('/exercises')}
+                                >
+                                    Uppgifter
+                                </button>
+                            )}
                             <button
                                 className={`nav-button ${location.pathname === '/statistics' ? 'active' : ''}`}
                                 onClick={() => navigate('/statistics')}
@@ -46,7 +66,7 @@ function Navbar() {
                             <button
                                 className="auth-button logout-btn"
                                 onClick={() => {
-                                    localStorage.removeItem("token");
+                                    localStorage.clear();
                                     navigate('/login')
                                 }}
                             >

@@ -11,7 +11,7 @@ function LoginPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    userService.login(userName, password).then(res => {
+    userService.login(userName, password).then(async res => {
         if (!res) {
             alert('Fel inloggning, försök igen!');
             return;
@@ -19,7 +19,18 @@ function LoginPage() {
 
         // Res is then token
         localStorage.setItem("token", res);
-        navigate('/exercises');
+
+        // Once again; this is not the best way, it should be done via a context or similar
+        const code = await userService.verifyTeacherClassCode(res);
+        if (code) localStorage.setItem('classCode', code);
+
+        const type = await userService.verifyUserType(res);
+        if (type) localStorage.setItem('userType', type);
+
+        userService.verifyUserType(res).then(type => {
+            if (type !== 'student') navigate('/statistics');
+            else navigate('/exercises');
+        });
     })
   };
 
