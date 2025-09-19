@@ -14,15 +14,10 @@ function RegisterPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [classCode, setClassCode] = useState('');
-  const [parentEmail, setParentEmail] = useState('');
+  const [parentUsername, setParentUsername] = useState('');
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Backend integration kommer här / för Phillip
-    console.log('Register attempt:', { 
-      userType, firstName, lastName, email: username, password, classCode, parentEmail 
-    });
-    
     if (password !== confirmPassword) {
       alert('Lösenorden matchar inte!');
       return;
@@ -85,7 +80,7 @@ function RegisterPage() {
                 id="firstName"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                placeholder="Ditt förnamn"
+                placeholder={userType === 'student' ? "Kalle" : userType === 'teacher' ? "Fru" : "Kvacke"}
                 required
               />
             </div>
@@ -97,20 +92,20 @@ function RegisterPage() {
                 id="lastName"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                placeholder="Ditt efternamn"
+                placeholder={userType === 'student' ? "Anka" : userType === 'teacher' ? "Näbblund" : "Anka"}
                 required
               />
             </div>
           </div>
 
           <div className="form-group">
-            <label htmlFor="username">E-postadress:</label>
+            <label htmlFor="username">Användarnamn:</label>
             <input
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="kalle.anka"
+              placeholder={userType === 'student' ? "kalle.anka" : userType === 'teacher' ? "fru.nabblund" : "kvacke.anka"}
               required
             />
           </div>
@@ -157,13 +152,13 @@ function RegisterPage() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="parentEmail">Förälders e-post (valfritt):</label>
+                <label htmlFor="parentUsername">Förälders användarnamn (valfritt):</label>
                 <input
-                  type="email"
-                  id="parentEmail"
-                  value={parentEmail}
-                  onChange={(e) => setParentEmail(e.target.value)}
-                  placeholder="foralder@exempel.se"
+                  type="text"
+                  id="parentUsername"
+                  value={parentUsername}
+                  onChange={(e) => setParentUsername(e.target.value)}
+                  placeholder="kvacke.anka"
                 />
               </div>
             </>

@@ -96,6 +96,10 @@
   background-color: #e6f3ff;
 }
 
+.radio-option input[type="radio"] {
+  display: none;
+}
+
 .radio-option input[type="radio"]:checked + label,
 .radio-option:has(input[type="radio"]:checked) {
   border-color: #4169e1;

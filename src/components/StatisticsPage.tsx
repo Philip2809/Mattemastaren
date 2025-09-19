@@ -260,9 +260,9 @@ function StatisticsPage() {
                     <button onClick={() => navigate('/exercises')} className="continue-button">
                         Fortsätt öva
                     </button>
-                    <button onClick={() => navigate('/home')} className="home-button">
+                    {/* <button onClick={() => navigate('/home')} className="home-button">
                         Tillbaka hem
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>
