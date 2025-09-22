@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { exercises, categories, difficulties } from '../exercises';
 import './StatisticsPage.css';
 import { exercisesService } from '../fake-backend/exercises';
@@ -30,12 +30,15 @@ function StatisticsPage() {
     const navigate = useNavigate();
     const [userStats, setUserStats] = useState<UserStats>({});
     const [currentUser, setCurrentUser] = useState<string>('');
+    const [availableUsers, setAvailableUsers] = useState<string[]>([]);
     const currentUserType = localStorage.getItem('userType');
 
     useEffect(() => {
         exercisesService.getStatsData(localStorage.getItem('token') || '').then(res => {
             setUserStats(res);
-            setCurrentUser(Object.keys(res)[0] || '');
+            const users = Object.keys(res);
+            setAvailableUsers(users);
+            setCurrentUser(users[0] || '');
         });
     }, []);
 
@@ -145,6 +148,22 @@ function StatisticsPage() {
                         currentUserType === 'teacher' ? 
                         'Här ser du din elevs progress i Mattemästaren' :
                         'Här ser du ditt barns progress i Mattemästaren'}</p>
+                    
+                    {(currentUserType === 'teacher' || currentUserType === 'parent') && availableUsers.length > 1 && (
+                        <div className="user-selector">
+                            <label htmlFor="user-select">Välj elev:</label>
+                            <select 
+                                id="user-select"
+                                value={currentUser} 
+                                onChange={(e) => setCurrentUser(e.target.value)}
+                                className="user-select"
+                            >
+                                {availableUsers.map(user => (
+                                    <option key={user} value={user}>{user}</option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
                 </div>
 
                 {/* Översikt */}

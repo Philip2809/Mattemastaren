@@ -42,8 +42,7 @@ async function getStatsData(token: string) {
     if (userType === 'student') {
         userIds = [userId];
     } else if (userType === 'teacher') {
-        const classCode = await userService.verifyTeacherClassCode(token);
-        const students = await userDb.getUsers({ type: 'student', classCode });
+        const students = await userDb.getUsers({ type: 'student' });
         userIds = students.map(s => s.id);
     } else if (userType === 'parent') {
         const parent = (await userDb.getUsers({ id: await userService.verifyToken(token) }))[0];

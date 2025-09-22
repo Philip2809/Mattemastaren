@@ -28,6 +28,35 @@
     opacity: 0.9;
 }
 
+.user-selector {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.user-selector label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 500;
+}
+
+.user-select {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+.user-select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
 .stats-section {
     background: white;
     border-radius: 16px;
